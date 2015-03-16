@@ -159,7 +159,7 @@ var DockerMachine = {
   dockerTerminal: function () {
     var terminal = path.join(process.cwd(), 'resources', 'terminal');
     this.info().then(machine => {
-      var cmd = [terminal, `DOCKER_HOST=${machine.url} DOCKER_CERT_PATH=${path.join(process.env[(process.platform === 'win32') ? 'USERPROFILE' : 'HOME'], '.docker/machine/machines/' + machine.name)} DOCKER_TLS_VERIFY=1 $SHELL`];
+      var cmd = [terminal, `export DOCKER_HOST=${machine.url} ; export DOCKER_CERT_PATH=${path.join(process.env[(process.platform === 'win32') ? 'USERPROFILE' : 'HOME'], '.docker/machine/machines/' + machine.name)} ; export DOCKER_TLS_VERIFY=1`];
       util.exec(cmd).then(() => {});
     });
   },
